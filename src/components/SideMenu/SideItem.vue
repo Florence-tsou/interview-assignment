@@ -9,7 +9,7 @@
       @click.stop="handleClickItem(item.key)"
     >
       <span>{{ item.text }}</span>
-      <div v-if="item.children && shouldHighlight(item)" class="menu-children">
+      <div v-if="item.children?.length && shouldHighlight(item)" class="menu-children">
         <SideItem
           :menuData="item.children"
           :selectedKey="props.selectedKey"

@@ -9,7 +9,7 @@
     </div>
 
     <div>
-      <div ref="menuButtonRef" class="menu-button" @click="toggleMenu">Side Menu</div>
+      <button ref="menuButtonRef" class="menu-button" @click="toggleMenu">側邊選單</button>
 
       <transition name="slide">
         <div v-if="isMenuOpen" ref="menuListRef" class="menu-list">
@@ -178,7 +178,9 @@ const getSelectedListRecursive = (item: MenuItem) => {
 }
 
 watch(selectedKey, (newVal) => {
-  localStorage.setItem('selectedKey', newVal)
+  if (newVal) {
+    localStorage.setItem('selectedKey', newVal)
+  }
 })
 
 onMounted(() => {
@@ -200,24 +202,20 @@ onUnmounted(() => {
 
   .menu-button {
     width: 100px;
-    background: #f0f0f0;
-    border: 1px solid #000;
-    border-radius: 0.25rem;
-    text-align: center;
     cursor: pointer;
-    user-select: none;
   }
 
   .menu-list {
     min-width: 50%;
-    height: 100%;
+    height: 100vh;
     background-color: #000;
     color: #fff;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     z-index: 2;
     padding: 1rem;
+    overflow-y: auto;
   }
 
   .slide-enter-active {
