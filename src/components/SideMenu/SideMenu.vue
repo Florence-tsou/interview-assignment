@@ -1,29 +1,44 @@
 <template>
   <div class="side-menu">
-    <div ref="menuButtonRef" class="menu-button" @click="toggleMenu">Side Menu</div>
+    <div>
+      <select v-model="selectedKey">
+        <option v-for="item in selectedList" :key="item.key" :value="item.key">
+          {{ item.label }}
+        </option>
+      </select>
+    </div>
 
-    <transition name="slide">
-      <div v-if="isMenuOpen" ref="menuListRef" class="menu-list">
-        <SideItem :menuData="menuList" :selectedKey="selectedKey" @item-click="handleItemClick" />
-      </div>
-    </transition>
+    <div>
+      <div ref="menuButtonRef" class="menu-button" @click="toggleMenu">Side Menu</div>
+
+      <transition name="slide">
+        <div v-if="isMenuOpen" ref="menuListRef" class="menu-list">
+          <SideItem :menuData="menuList" :selectedKey="selectedKey" @item-click="handleItemClick" />
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import SideItem from './SideItem.vue'
 
+type MenuItem = {
+  key: string
+  text: string
+  children?: MenuItem[]
+}
 const menuButtonRef = ref<HTMLDivElement | null>(null)
 const menuListRef = ref<HTMLDivElement | null>(null)
 const isMenuOpen = ref(false)
+const selectedList = ref<{ key: string; label: string }[]>([])
 const selectedKey = ref<string | null>(null)
 
 const handleItemClick = (key: string) => {
   selectedKey.value = key
-  localStorage.setItem('selectedKey', key)
 }
 
-const menuList = ref([
+const menuList = ref<MenuItem[]>([
   {
     key: '64f',
     text: '好喝黑糖',
@@ -148,9 +163,28 @@ const closeMenu = (event: MouseEvent) => {
   }
 }
 
+const getSelectedList = () => {
+  menuList.value.forEach((item) => getSelectedListRecursive(item))
+}
+
+const getSelectedListRecursive = (item: MenuItem) => {
+  if (item.children) {
+    item.children.forEach((child) => getSelectedListRecursive(child))
+  }
+  selectedList.value.push({
+    key: item.key,
+    label: item.text,
+  })
+}
+
+watch(selectedKey, (newVal) => {
+  localStorage.setItem('selectedKey', newVal)
+})
+
 onMounted(() => {
   document.addEventListener('click', closeMenu)
   selectedKey.value = localStorage.getItem('selectedKey') || null
+  getSelectedList()
 })
 
 onUnmounted(() => {
@@ -161,7 +195,7 @@ onUnmounted(() => {
 .side-menu {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
   padding: 0.5rem;
 
   .menu-button {
