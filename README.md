@@ -1,48 +1,35 @@
-# interview-assignment
+# 主頁面-側邊選單收合按鈕
 
-This template should help get you started developing with Vue 3 in Vite.
+請製作一個按鈕，無指定樣式，可開啟/收合側邊選單即可
 
-## Recommended IDE Setup
+# 主頁面-九宮格動畫
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+請切出一個九宮格，部分格子會不停閃爍。並且在指定的格子內(四個角落)有一顆球，球會向右移動一段距離
 
-## Recommended Browser Setup
+- 九宮格需要垂直置中於下方區塊 (示意圖中灰色底色區塊)
+- 每個格子的規格如下 (寬度為螢幕寬均分, 間隔距離自行決定即可)
+- 指定格子(右上, 正中, 右下) 會不停閃爍 (需有漸變or淡入淡出效果)
+- 指定的球 (四個角落)
+- 球往右方移動時會在所有九宮格的上方，不被任一九宮格蓋住，且全程保持透明度 100%
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+# 側邊選單
 
-## Type Support for `.vue` Imports in TS
+請依照上方給定的資料，產出側邊選單
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- 主頁面的按鈕可以開啟側邊選單，點擊空白處可以關閉選單
+- 側邊選單內每個項目都可以點擊，點擊後 highlight 選取中的項目，若該項目有子元素，會展開該層。
+- 一次只會有一個展開且 highlight 的項目。
 
-## Customize configuration
+額外需求
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+# 九宮格
 
-## Project Setup
+1. 請使用兩種以上的動畫執行方式，來繪製動畫
+2. 四顆球同時朝同一個座標點移動
+3. 請在效能考量下，設計可同時存在一百顆球、且指定飛行起終點的結構
 
-```sh
-npm install
-```
+# 側邊選單
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+1. 另提供一個下拉選單，需包含所有種類。從下拉選單中選取任一項目時，等同點擊該項目
+2. 請實作記憶功能，關閉分頁後再開啟，可以顯示上次選取的項目
+3. 請在效能考量下，設計可收合、展開最多一百層的選單
