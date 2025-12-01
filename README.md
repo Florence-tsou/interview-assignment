@@ -1,3 +1,7 @@
+# github pages
+
+- https://florence-tsou.github.io/interview-assignment/
+
 # 主頁面-側邊選單收合按鈕
 
 請製作一個按鈕，無指定樣式，可開啟/收合側邊選單即可
@@ -20,7 +24,7 @@
 - 側邊選單內每個項目都可以點擊，點擊後 highlight 選取中的項目，若該項目有子元素，會展開該層。
 - 一次只會有一個展開且 highlight 的項目。
 
-額外需求
+## 額外需求
 
 # 九宮格
 
